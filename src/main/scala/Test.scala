@@ -5,6 +5,12 @@ import spray.routing._
 import spray.routing.directives.LogEntry
 import spray.json._
 
+
+
+object MasterJsonProtocol extends DefaultJsonProtocol {
+  implicit val anwserFormat = jsonFormat2(Answer)
+}
+
 class WHttpService extends Actor with HttpService with ActorLogging {
 
   implicit def actorRefFactory = context
@@ -27,6 +33,3 @@ class WHttpService extends Actor with HttpService with ActorLogging {
 }
 
 case class Answer(code: Int, content: String)
-object MasterJsonProtocol extends DefaultJsonProtocol {
-  implicit val anwserFormat = jsonFormat2(Answer)
-}
